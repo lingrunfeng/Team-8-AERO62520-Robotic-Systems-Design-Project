@@ -1,0 +1,28 @@
+# MoveIt Controllers configuration for LeoRover + MyCobot integration
+# Joint names include mycobot_ prefix to match LeoRover URDF
+
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - arm_controller
+    - gripper_action_controller
+
+  arm_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - mycobot_link1_to_mycobot_link2
+      - mycobot_link2_to_mycobot_link3
+      - mycobot_link3_to_mycobot_link4
+      - mycobot_link4_to_mycobot_link5
+      - mycobot_link5_to_mycobot_link6
+      - mycobot_link6_to_mycobot_link6_flange
+
+  gripper_action_controller:
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints:
+      - mycobot_gripper_controller

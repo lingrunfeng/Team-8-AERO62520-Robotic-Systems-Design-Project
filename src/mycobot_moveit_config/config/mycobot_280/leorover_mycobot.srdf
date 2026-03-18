@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="mycobot_280">
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="mycobot_base_link"/>
+
+    <group name="arm">
+        <joint name="mycobot_link1_to_mycobot_link2"/>
+        <joint name="mycobot_link2_to_mycobot_link3"/>
+        <joint name="mycobot_link3_to_mycobot_link4"/>
+        <joint name="mycobot_link4_to_mycobot_link5"/>
+        <joint name="mycobot_link5_to_mycobot_link6"/>
+        <joint name="mycobot_link6_to_mycobot_link6_flange"/>
+        <joint name="mycobot_link6_flange_to_mycobot_gripper_base"/>
+    </group>
+
+    <group name="gripper">
+        <joint name="mycobot_gripper_controller"/>
+    </group>
+
+    <group name="arm_with_gripper">
+        <group name="arm" />
+        <group name="gripper" />
+    </group>
+
+    <end_effector name="gripper" parent_link="mycobot_link6_flange" group="gripper"/>
+
+    <group_state name="home" group="arm">
+        <joint name="mycobot_link1_to_mycobot_link2" value="0"/>
+        <joint name="mycobot_link2_to_mycobot_link3" value="0"/>
+        <joint name="mycobot_link3_to_mycobot_link4" value="0"/>
+        <joint name="mycobot_link4_to_mycobot_link5" value="0"/>
+        <joint name="mycobot_link5_to_mycobot_link6" value="0"/>
+        <joint name="mycobot_link6_to_mycobot_link6_flange" value="0"/>
+    </group_state>
+
+    <group_state name="ready" group="arm">
+        <joint name="mycobot_link1_to_mycobot_link2" value="0"/>
+        <joint name="mycobot_link2_to_mycobot_link3" value="0"/>
+        <joint name="mycobot_link3_to_mycobot_link4" value="1.5708"/>
+        <joint name="mycobot_link4_to_mycobot_link5" value="1.5708"/>
+        <joint name="mycobot_link5_to_mycobot_link6" value="0"/>
+        <joint name="mycobot_link6_to_mycobot_link6_flange" value="0"/>
+    </group_state>
+
+    <group_state name="open" group="gripper">
+        <joint name="mycobot_gripper_controller" value="0.0"/>
+    </group_state>
+
+    <group_state name="half_closed" group="gripper">
+        <joint name="mycobot_gripper_controller" value="-0.34"/>
+    </group_state>
+
+    <group_state name="closed" group="gripper">
+        <joint name="mycobot_gripper_controller" value="-0.50"/>
+    </group_state>
+
+    <group_state name="home" group="arm_with_gripper">
+        <joint name="mycobot_link1_to_mycobot_link2" value="0"/>
+        <joint name="mycobot_link2_to_mycobot_link3" value="0"/>
+        <joint name="mycobot_link3_to_mycobot_link4" value="0"/>
+        <joint name="mycobot_link4_to_mycobot_link5" value="0"/>
+        <joint name="mycobot_link5_to_mycobot_link6" value="0"/>
+        <joint name="mycobot_link6_to_mycobot_link6_flange" value="0"/>
+        <joint name="mycobot_gripper_controller" value="0"/>
+    </group_state>
+
+    <group_state name="ready" group="arm_with_gripper">
+        <joint name="mycobot_link1_to_mycobot_link2" value="0"/>
+        <joint name="mycobot_link2_to_mycobot_link3" value="0"/>
+        <joint name="mycobot_link3_to_mycobot_link4" value="1.5708"/>
+        <joint name="mycobot_link4_to_mycobot_link5" value="1.5708"/>
+        <joint name="mycobot_link5_to_mycobot_link6" value="0"/>
+        <joint name="mycobot_link6_to_mycobot_link6_flange" value="0"/>
+        <joint name="mycobot_gripper_controller" value="0"/>
+    </group_state>
+
+    <!-- Collision pairs -->
+    <disable_collisions link1="mycobot_base_link" link2="mycobot_link1" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_base_link" link2="mycobot_link2" reason="Never"/>
+    <disable_collisions link1="mycobot_base_link" link2="mycobot_link3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_link1" link2="mycobot_link2" reason="Adjacent"/>
+
+    <disable_collisions link1="mycobot_link2" link2="mycobot_link3" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_link2" link2="mycobot_link5" reason="Never"/>
+
+    <disable_collisions link1="mycobot_link3" link2="mycobot_link4" reason="Adjacent"/>
+
+    <disable_collisions link1="mycobot_link4" link2="mycobot_link5" reason="Adjacent"/>
+
+    <disable_collisions link1="mycobot_link5" link2="mycobot_link6" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_base" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_left2" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_left3" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_right1" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_right2" reason="Never"/>
+    <disable_collisions link1="mycobot_link5" link2="mycobot_gripper_right3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_link6" link2="mycobot_link6_flange" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_base" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_left2" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_left3" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_right1" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_right2" reason="Never"/>
+    <disable_collisions link1="mycobot_link6" link2="mycobot_gripper_right3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_base" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_left2" reason="Never"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_left3" reason="Never"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_right1" reason="Never"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_right2" reason="Never"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="mycobot_gripper_right3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_left2" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_left3" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_right1" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_right2" reason="Adjacent"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="mycobot_gripper_right3" reason="Adjacent"/>
+
+    <disable_collisions link1="mycobot_gripper_left2" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_left2" link2="mycobot_gripper_left3" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_left2" link2="mycobot_gripper_right1" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_left2" link2="mycobot_gripper_right2" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_left2" link2="mycobot_gripper_right3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_gripper_left3" link2="mycobot_gripper_left1" reason="Adjacent"/>
+
+    <disable_collisions link1="mycobot_gripper_right1" link2="mycobot_gripper_left3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_gripper_right2" link2="mycobot_gripper_left1" reason="Never"/>
+    <disable_collisions link1="mycobot_gripper_right2" link2="mycobot_gripper_left3" reason="Never"/>
+
+    <disable_collisions link1="mycobot_gripper_right2" link2="mycobot_gripper_right3" reason="Adjacent"/>
+
+    <!-- ========== DISABLE ALL LEOROVER COLLISIONS ========== -->
+    <!-- This prevents LeoRover base from interfering with MTC planning -->
+    
+    <!-- LeoRover self-collisions -->
+    <disable_collisions link1="rocker_L_link" link2="wheel_FL_link" reason="Adjacent"/>
+    <disable_collisions link1="rocker_L_link" link2="wheel_RL_link" reason="Adjacent"/>
+    <disable_collisions link1="rocker_R_link" link2="wheel_FR_link" reason="Adjacent"/>
+    <disable_collisions link1="rocker_R_link" link2="wheel_RR_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="rocker_L_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="rocker_R_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="wheel_FL_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="wheel_FR_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="wheel_RL_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="wheel_RR_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="scan_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="base_footprint" reason="Default"/>
+    <disable_collisions link1="base_link" link2="camera_link" reason="Default"/>
+    <disable_collisions link1="base_link" link2="antenna_link" reason="Default"/>
+    
+    <!-- Disable wheels with each other -->
+    <disable_collisions link1="wheel_FL_link" link2="wheel_FR_link" reason="Default"/>
+    <disable_collisions link1="wheel_FL_link" link2="wheel_RL_link" reason="Default"/>
+    <disable_collisions link1="wheel_FL_link" link2="wheel_RR_link" reason="Default"/>
+    <disable_collisions link1="wheel_FR_link" link2="wheel_RL_link" reason="Default"/>
+    <disable_collisions link1="wheel_FR_link" link2="wheel_RR_link" reason="Default"/>
+    <disable_collisions link1="wheel_RL_link" link2="wheel_RR_link" reason="Default"/>
+    
+    <!-- Disable rockers with sensors -->
+    <disable_collisions link1="rocker_L_link" link2="rocker_R_link" reason="Default"/>
+    <disable_collisions link1="rocker_L_link" link2="scan_link" reason="Default"/>
+    <disable_collisions link1="rocker_R_link" link2="scan_link" reason="Default"/>
+    <disable_collisions link1="rocker_L_link" link2="camera_link" reason="Default"/>
+    <disable_collisions link1="rocker_R_link" link2="camera_link" reason="Default"/>
+    <disable_collisions link1="rocker_L_link" link2="antenna_link" reason="Default"/>
+    <disable_collisions link1="rocker_R_link" link2="antenna_link" reason="Default"/>
+    
+    <!-- Disable sensors with each other -->
+    <disable_collisions link1="scan_link" link2="camera_link" reason="Default"/>
+    <disable_collisions link1="scan_link" link2="antenna_link" reason="Default"/>
+    <disable_collisions link1="scan_link" link2="base_footprint" reason="Default"/>
+    <disable_collisions link1="camera_link" link2="antenna_link" reason="Default"/>
+    <disable_collisions link1="camera_link" link2="base_footprint" reason="Default"/>
+    <disable_collisions link1="antenna_link" link2="base_footprint" reason="Default"/>
+    
+    <!-- Disable ALL LeoRover parts with arm mount and arm base -->
+    <disable_collisions link1="base_link" link2="arm_mount_link" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="mycobot_base_link" reason="Default"/>
+    <disable_collisions link1="scan_link" link2="arm_mount_link" reason="Default"/>
+    <disable_collisions link1="scan_link" link2="mycobot_base_link" reason="Default"/>
+    <disable_collisions link1="camera_link" link2="arm_mount_link" reason="Default"/>
+    <disable_collisions link1="camera_link" link2="mycobot_base_link" reason="Default"/>
+    <disable_collisions link1="antenna_link" link2="arm_mount_link" reason="Default"/>
+    <disable_collisions link1="antenna_link" link2="mycobot_base_link" reason="Default"/>
+    <disable_collisions link1="base_footprint" link2="arm_mount_link" reason="Default"/>
+    <disable_collisions link1="base_footprint" link2="mycobot_base_link" reason="Default"/>
+    
+    <!-- ========== END LEOROVER COLLISION DISABLES ========== -->
+
+    <!-- ========== DISABLE ARM-CAMERA COLLISIONS ========== -->
+    <!-- Allow arm to move near RGBD camera without collision errors -->
+    <disable_collisions link1="mycobot_base_link" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link1" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link2" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link3" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link4" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link5" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link6" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_link6_flange" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_base" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_left1" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_left2" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_left3" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_right1" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_right2" link2="rgbd_camera_link" reason="Default"/>
+    <disable_collisions link1="mycobot_gripper_right3" link2="rgbd_camera_link" reason="Default"/>
+    <!-- ========== END ARM-CAMERA COLLISION DISABLES ========== -->
+
+</robot>
